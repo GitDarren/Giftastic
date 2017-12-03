@@ -19,7 +19,7 @@ function loadButtons()  {
         console.log(term);
 
 
-        var queryURL = `https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${term}&limit=10`;
+        var queryURL = `https://api.giphy.com/v1/gifs/search?apikey=dc6zaTOxFJmzC&q=${term}&limit=10`;
 
         $.ajax({
             url: queryURL,
@@ -60,6 +60,18 @@ function loadButtons()  {
 
 loadButtons();//Load Buttons with preset topics on DOM
 
-    $(document).on("submit")
+    $(document).on("submit", "form", function(event)    {
+        event.preventDefault();
+        let formValue = $("input").val().trim();
+        if( (formValue == "")  ||  (formValue== null) )   {
+            alert("Stop this stupid Shit");
+            return;
+        } else  {
+            topics.push(formValue);
+            $("input:text").val('');
+            loadButtons();
+            return false;
+        }
+    })
 
 })//Closes document.ready
