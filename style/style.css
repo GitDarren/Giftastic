@@ -1,0 +1,28 @@
+#head-section   {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#head-section > *   {
+    width: 25%;
+    margin: 2% auto;
+
+}
+
+.topic  {
+    margin-top: 2%;
+}
+
+#buttonDiv  {
+
+width: 30%;
+margin: 2% auto;
+    
+}
+
+#gifDiv {
+    margin: 10%;
+}
+
+img {
+    border: solid black;

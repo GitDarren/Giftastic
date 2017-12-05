@@ -2,10 +2,13 @@
 
 $(document).ready(function () {
 
+//Variable to set up default buttons with topics already selected//    
 let topics = ["Rangers", "RedSox", "Yankees", "Dodgers", "Astros"]
 
+//Function to load buttons with prefined values from the variable topics.  
 function loadButtons()  {
     $("#buttonDiv").empty();
+    //Creates a variable to 
     let topicButtons = topics.map(function(topic, index)    {
         $("#buttonDiv").append(`
         <button class ="btn btn-primary topic terms"  id=${topic}>${topic}</button>
@@ -19,7 +22,7 @@ function loadButtons()  {
         console.log(term);
 
 
-        var queryURL = `https://api.giphy.com/v1/gifs/search?apikey=dc6zaTOxFJmzC&q=${term}&limit=10`;
+        var queryURL = `https://api.giphy.com/v1/gifs/search?apikey=dc6zaTOxFJmzC&q=${term}&limit=9`;
 
         $.ajax({
             url: queryURL,
@@ -34,9 +37,10 @@ function loadButtons()  {
 
                 $.each(dataArr, function (index, value) {
                     let gif = dataArr[index];
+                    let row = index
                     $('#gifDiv').prepend(`
-                <div class="gif-box">
-                <img id=${term} class="img-box" src="${gif.images.original_still.url}" alt="a gif of ${term}"/>
+                <div class="gif-box col-sm-4 col-lg-6">
+                <img id=${term} class=" img-box" src="${gif.images.fixed_width_still.url}" alt="a gif of ${term}"/>
                 <p class="gif-rating">Rating: ${gif.rating}</p>
                 </div>
                 `);
