@@ -8,26 +8,28 @@ let topics = ["Rangers", "RedSox", "Yankees", "Dodgers", "Astros"]
 //Function to load buttons with prefined values from the variable topics.  
 function loadButtons()  {
     $("#buttonDiv").empty();
-    //Creates a variable to 
+    //Creates a variable to map the topics onto the buttons using append//
     let topicButtons = topics.map(function(topic, index)    {
         $("#buttonDiv").append(`
         <button class ="btn btn-primary topic terms"  id=${topic}>${topic}</button>
         `)
     });
 
-
+    //Basically uses this to assign term to the id of gifDiv
     $(".topic").on("click", function () {
         let term = $(this).attr("id");
         $("#gifDiv").empty();
         console.log(term);
 
-
+        //Sets up variable for the queryURL which includes a JSON String
         var queryURL = `https://api.giphy.com/v1/gifs/search?apikey=dc6zaTOxFJmzC&q=${term}&limit=9`;
 
+        //Sets up AJAX to get data from the appropriate URL
         $.ajax({
             url: queryURL,
             method: "GET"
         })//Closes Ajax
+
 
             .done(function (response) {
 
@@ -35,6 +37,7 @@ function loadButtons()  {
 
                 console.log(dataArr);
 
+                //Dynamically creates new divs with the gif and associated rating.//
                 $.each(dataArr, function (index, value) {
                     let gif = dataArr[index];
                     let row = index
@@ -46,6 +49,7 @@ function loadButtons()  {
                 `);
                 });
 
+                //This create the function that starts and stops the gif from playing - in acuality it just replaces the url with the still and animated version of the gif.
                 $(".img-box").each(function(index)  {
                 $(this).on("click", function()  {
                     let src = $(this).attr("src")
